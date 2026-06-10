@@ -1,0 +1,1009 @@
+[
+  {
+    "matchup": "Boston Red Sox @ Tampa Bay Rays",
+    "commence_time": "2026-06-10T17:11:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.68,
+        "away_ml": 2.24,
+        "home_spread_odd": 2.5,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.55,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 7.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Lucas Giolito",
+        "handedness": "RHP",
+        "SIERA": 4.04,
+        "FIP": 4.59,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Shane McClanahan",
+        "handedness": "LHP",
+        "SIERA": 4.05,
+        "FIP": 4.6,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 97,
+        "wRC_vs_RHP": 93,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 101,
+        "wRC_vs_RHP": 97,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "park_factor": {
+        "run_modifier": 0.95,
+        "hr_modifier": 0.9
+      }
+    }
+  },
+  {
+    "matchup": "New York Yankees @ Cleveland Guardians",
+    "commence_time": "2026-06-10T17:11:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.89,
+        "away_ml": 1.96,
+        "home_spread_odd": 1.51,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.62,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.82,
+        "total_under_odd": 2,
+        "total_point": 7.5
+      },
+      "draftkings": {
+        "home_ml": 1.83,
+        "away_ml": 1.99,
+        "home_spread_odd": 1.49,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.68,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.98,
+        "total_under_odd": 1.84,
+        "total_point": 8
+      },
+      "bovada": {
+        "home_ml": 1.85,
+        "away_ml": 1.98,
+        "home_spread_odd": 1.51,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.65,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8
+      },
+      "betmgm": {
+        "home_ml": 1.85,
+        "away_ml": 1.98,
+        "home_spread_odd": 1.5,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.65,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.83,
+        "total_under_odd": 2,
+        "total_point": 7.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Gerrit Cole",
+        "handedness": "RHP",
+        "SIERA": 3.41,
+        "FIP": 3.96,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Tanner Bibee",
+        "handedness": "RHP",
+        "SIERA": 3.93,
+        "FIP": 4.48,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 107,
+        "wRC_vs_RHP": 103,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 97,
+        "wRC_vs_RHP": 93,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "park_factor": {
+        "run_modifier": 0.97,
+        "hr_modifier": 0.93
+      }
+    }
+  },
+  {
+    "matchup": "Washington Nationals @ San Francisco Giants",
+    "commence_time": "2026-06-10T19:46:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.83,
+        "away_ml": 2.02,
+        "home_spread_odd": 1.5,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.64,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.85,
+        "total_under_odd": 1.96,
+        "total_point": 8.5
+      },
+      "draftkings": {
+        "home_ml": 1.83,
+        "away_ml": 2,
+        "home_spread_odd": 1.51,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.61,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.85,
+        "total_under_odd": 1.97,
+        "total_point": 8.5
+      },
+      "bovada": {
+        "home_ml": 1.83,
+        "away_ml": 2,
+        "home_spread_odd": 1.51,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.65,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.8,
+        "total_under_odd": 2.05,
+        "total_point": 8.5
+      },
+      "betmgm": {
+        "home_ml": 1.83,
+        "away_ml": 2,
+        "home_spread_odd": 2.6,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.48,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.83,
+        "total_under_odd": 2,
+        "total_point": 8.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "MacKenzie Gore",
+        "handedness": "LHP",
+        "SIERA": 4.72,
+        "FIP": 5.27,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Logan Webb",
+        "handedness": "RHP",
+        "SIERA": 4.61,
+        "FIP": 5.16,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 104,
+        "wRC_vs_RHP": 100,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 101,
+        "wRC_vs_RHP": 97,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "park_factor": {
+        "run_modifier": 0.94,
+        "hr_modifier": 0.88
+      }
+    }
+  },
+  {
+    "matchup": "Cincinnati Reds @ San Diego Padres",
+    "commence_time": "2026-06-10T20:11:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.61,
+        "away_ml": 2.38,
+        "home_spread_odd": 2.32,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.62,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8
+      },
+      "draftkings": {
+        "home_ml": 1.6,
+        "away_ml": 2.38,
+        "home_spread_odd": 2.31,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.63,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8
+      },
+      "bovada": {
+        "home_ml": 1.61,
+        "away_ml": 2.39,
+        "home_spread_odd": 2.35,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.62,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8
+      },
+      "betmgm": {
+        "home_ml": 1.59,
+        "away_ml": 2.4,
+        "home_spread_odd": 2.35,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.62,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Hunter Greene",
+        "handedness": "RHP",
+        "SIERA": 5.01,
+        "FIP": 5.56,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Yu Darvish",
+        "handedness": "RHP",
+        "SIERA": 4.09,
+        "FIP": 4.64,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 99,
+        "wRC_vs_RHP": 95,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 91,
+        "wRC_vs_RHP": 87,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "park_factor": {
+        "run_modifier": 0.96,
+        "hr_modifier": 0.94
+      }
+    }
+  },
+  {
+    "matchup": "Seattle Mariners @ Baltimore Orioles",
+    "commence_time": "2026-06-10T22:36:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 2.04,
+        "away_ml": 1.82,
+        "home_spread_odd": 1.62,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.34,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.93,
+        "total_under_odd": 1.89,
+        "total_point": 9
+      },
+      "draftkings": {
+        "home_ml": 2.04,
+        "away_ml": 1.79,
+        "home_spread_odd": 1.64,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.3,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 9
+      },
+      "bovada": {
+        "home_ml": 2.04,
+        "away_ml": 1.81,
+        "home_spread_odd": 1.62,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.35,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 9
+      },
+      "betmgm": {
+        "home_ml": 2.05,
+        "away_ml": 1.8,
+        "home_spread_odd": 1.65,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.25,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 9
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "George Kirby",
+        "handedness": "RHP",
+        "SIERA": 3.64,
+        "FIP": 4.19,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Corbin Burnes",
+        "handedness": "RHP",
+        "SIERA": 4.76,
+        "FIP": 5.31,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 101,
+        "wRC_vs_RHP": 97,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 101,
+        "wRC_vs_RHP": 97,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "park_factor": {
+        "run_modifier": 0.98,
+        "hr_modifier": 0.95
+      }
+    }
+  },
+  {
+    "matchup": "Arizona Diamondbacks @ Miami Marlins",
+    "commence_time": "2026-06-10T22:41:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.94,
+        "away_ml": 1.91,
+        "home_spread_odd": 1.54,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.52,
+        "away_spread_point": -1.5,
+        "total_over_odd": 2,
+        "total_under_odd": 1.82,
+        "total_point": 8.5
+      },
+      "draftkings": {
+        "home_ml": 1.91,
+        "away_ml": 1.91,
+        "home_spread_odd": 1.55,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.49,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.89,
+        "total_under_odd": 1.93,
+        "total_point": 8
+      },
+      "bovada": {
+        "home_ml": 1.91,
+        "away_ml": 1.91,
+        "home_spread_odd": 1.56,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.55,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.87,
+        "total_under_odd": 1.95,
+        "total_point": 8
+      },
+      "betmgm": {
+        "home_ml": 1.87,
+        "away_ml": 1.95,
+        "home_spread_odd": 1.53,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.55,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Zac Gallen",
+        "handedness": "RHP",
+        "SIERA": 4.4,
+        "FIP": 4.95,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Jesús Luzardo",
+        "handedness": "LHP",
+        "SIERA": 4.41,
+        "FIP": 4.96,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 98,
+        "wRC_vs_RHP": 94,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 99,
+        "wRC_vs_RHP": 95,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "park_factor": {
+        "run_modifier": 0.97,
+        "hr_modifier": 0.92
+      }
+    }
+  },
+  {
+    "matchup": "Los Angeles Dodgers @ Pittsburgh Pirates",
+    "commence_time": "2026-06-10T22:41:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 2.64,
+        "away_ml": 1.51,
+        "home_spread_odd": 1.95,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.87,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.94,
+        "total_under_odd": 1.88,
+        "total_point": 8
+      },
+      "draftkings": {
+        "home_ml": 2.63,
+        "away_ml": 1.5,
+        "home_spread_odd": 1.95,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.88,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.93,
+        "total_under_odd": 1.88,
+        "total_point": 8
+      },
+      "bovada": {
+        "home_ml": 2.69,
+        "away_ml": 1.48,
+        "home_spread_odd": 2,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.83,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8
+      },
+      "betmgm": {
+        "home_ml": 2.65,
+        "away_ml": 1.5,
+        "home_spread_odd": 1.95,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.87,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Tyler Glasnow",
+        "handedness": "RHP",
+        "SIERA": 3.33,
+        "FIP": 3.88,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Mitch Keller",
+        "handedness": "RHP",
+        "SIERA": 4.27,
+        "FIP": 4.82,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 110,
+        "wRC_vs_RHP": 106,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 103,
+        "wRC_vs_RHP": 99,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "park_factor": {
+        "run_modifier": 0.98,
+        "hr_modifier": 0.95
+      }
+    }
+  },
+  {
+    "matchup": "Philadelphia Phillies @ Toronto Blue Jays",
+    "commence_time": "2026-06-10T23:08:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 2.3,
+        "away_ml": 1.65,
+        "home_spread_odd": 1.77,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.08,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8.5
+      },
+      "draftkings": {
+        "home_ml": 2.19,
+        "away_ml": 1.7,
+        "home_spread_odd": 1.74,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.13,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8.5
+      },
+      "bovada": {
+        "home_ml": 2.23,
+        "away_ml": 1.68,
+        "home_spread_odd": 1.74,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.15,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8.5
+      },
+      "betmgm": {
+        "home_ml": 2.25,
+        "away_ml": 1.67,
+        "home_spread_odd": 1.74,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.1,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 8.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Zack Wheeler",
+        "handedness": "RHP",
+        "SIERA": 4.17,
+        "FIP": 4.72,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Kevin Gausman",
+        "handedness": "RHP",
+        "SIERA": 4.18,
+        "FIP": 4.73,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 96,
+        "wRC_vs_RHP": 92,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 98,
+        "wRC_vs_RHP": 94,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "park_factor": {
+        "run_modifier": 1.02,
+        "hr_modifier": 1.03
+      }
+    }
+  },
+  {
+    "matchup": "St. Louis Cardinals @ New York Mets",
+    "commence_time": "2026-06-10T23:11:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.77,
+        "away_ml": 2.1,
+        "home_spread_odd": 2.62,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.51,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8.5
+      },
+      "draftkings": {
+        "home_ml": 1.74,
+        "away_ml": 2.13,
+        "home_spread_odd": 2.53,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.54,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.99,
+        "total_under_odd": 1.84,
+        "total_point": 8.5
+      },
+      "bovada": {
+        "home_ml": 1.74,
+        "away_ml": 2.13,
+        "home_spread_odd": 2.6,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.54,
+        "away_spread_point": 1.5,
+        "total_over_odd": 2,
+        "total_under_odd": 1.83,
+        "total_point": 8.5
+      },
+      "betmgm": {
+        "home_ml": 1.71,
+        "away_ml": 2.15,
+        "home_spread_odd": 2.5,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.54,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.98,
+        "total_under_odd": 1.85,
+        "total_point": 8.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Sonny Gray",
+        "handedness": "RHP",
+        "SIERA": 4.19,
+        "FIP": 4.74,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Kodai Senga",
+        "handedness": "RHP",
+        "SIERA": 3.96,
+        "FIP": 4.51,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 100,
+        "wRC_vs_RHP": 96,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 93,
+        "wRC_vs_RHP": 89,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "park_factor": {
+        "run_modifier": 0.99,
+        "hr_modifier": 0.97
+      }
+    }
+  },
+  {
+    "matchup": "Atlanta Braves @ Chicago White Sox",
+    "commence_time": "2026-06-10T23:41:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 2.3,
+        "away_ml": 1.65,
+        "home_spread_odd": 1.72,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.15,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 7.5
+      },
+      "draftkings": {
+        "home_ml": 2.29,
+        "away_ml": 1.64,
+        "home_spread_odd": 1.78,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.06,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.92,
+        "total_under_odd": 1.91,
+        "total_point": 7.5
+      },
+      "bovada": {
+        "home_ml": 2.3,
+        "away_ml": 1.65,
+        "home_spread_odd": 1.74,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.15,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 7.5
+      },
+      "betmgm": {
+        "home_ml": 2.25,
+        "away_ml": 1.65,
+        "home_spread_odd": 1.77,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.05,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.91,
+        "total_under_odd": 1.91,
+        "total_point": 7.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Spencer Strider",
+        "handedness": "RHP",
+        "SIERA": 3.38,
+        "FIP": 3.93,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Garrett Crochet",
+        "handedness": "LHP",
+        "SIERA": 4.51,
+        "FIP": 5.06,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 106,
+        "wRC_vs_RHP": 102,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 104,
+        "wRC_vs_RHP": 100,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "park_factor": {
+        "run_modifier": 0.99,
+        "hr_modifier": 1.04
+      }
+    }
+  },
+  {
+    "matchup": "Texas Rangers @ Kansas City Royals",
+    "commence_time": "2026-06-10T23:41:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 2.08,
+        "away_ml": 1.79,
+        "home_spread_odd": 1.66,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.26,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.82,
+        "total_under_odd": 2,
+        "total_point": 9.5
+      },
+      "draftkings": {
+        "home_ml": 1.98,
+        "away_ml": 1.85,
+        "home_spread_odd": 1.64,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.3,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.93,
+        "total_under_odd": 1.88,
+        "total_point": 10
+      },
+      "bovada": {
+        "home_ml": 1.99,
+        "away_ml": 1.84,
+        "home_spread_odd": 1.62,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.35,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 10
+      },
+      "betmgm": {
+        "home_ml": 2,
+        "away_ml": 1.83,
+        "home_spread_odd": 1.65,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.25,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 10
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Nathan Eovaldi",
+        "handedness": "RHP",
+        "SIERA": 3.85,
+        "FIP": 4.4,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Cole Ragans",
+        "handedness": "LHP",
+        "SIERA": 4.54,
+        "FIP": 5.09,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 98,
+        "wRC_vs_RHP": 94,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 97,
+        "wRC_vs_RHP": 93,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "park_factor": {
+        "run_modifier": 0.98,
+        "hr_modifier": 0.94
+      }
+    }
+  },
+  {
+    "matchup": "Chicago Cubs @ Colorado Rockies",
+    "commence_time": "2026-06-11T00:41:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 2.4,
+        "away_ml": 1.6,
+        "home_spread_odd": 1.93,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.9,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.88,
+        "total_under_odd": 1.94,
+        "total_point": 12
+      },
+      "draftkings": {
+        "home_ml": 2.39,
+        "away_ml": 1.6,
+        "home_spread_odd": 1.93,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.89,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.87,
+        "total_under_odd": 1.95,
+        "total_point": 12
+      },
+      "bovada": {
+        "home_ml": 2.38,
+        "away_ml": 1.61,
+        "home_spread_odd": 1.91,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.91,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.87,
+        "total_under_odd": 1.95,
+        "total_point": 12
+      },
+      "betmgm": {
+        "home_ml": 2.35,
+        "away_ml": 1.61,
+        "home_spread_odd": 1.95,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 1.87,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.87,
+        "total_under_odd": 1.95,
+        "total_point": 12
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Justin Steele",
+        "handedness": "LHP",
+        "SIERA": 4.51,
+        "FIP": 5.06,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Kyle Freeland",
+        "handedness": "LHP",
+        "SIERA": 5.74,
+        "FIP": 6,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 101,
+        "wRC_vs_RHP": 97,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 100,
+        "wRC_vs_RHP": 96,
+        "last_3_days_bullpen_pitches": 43
+      },
+      "park_factor": {
+        "run_modifier": 1.32,
+        "hr_modifier": 1.28
+      }
+    }
+  },
+  {
+    "matchup": "Houston Astros @ Los Angeles Angels",
+    "commence_time": "2026-06-11T01:39:00Z",
+    "market_data": {
+      "fanduel": {
+        "home_ml": 1.82,
+        "away_ml": 2.04,
+        "home_spread_odd": 2.64,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.5,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8.5
+      },
+      "draftkings": {
+        "home_ml": 1.82,
+        "away_ml": 2.02,
+        "home_spread_odd": 2.63,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.5,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8.5
+      },
+      "bovada": {
+        "home_ml": 1.83,
+        "away_ml": 2.01,
+        "home_spread_odd": 1.5,
+        "home_spread_point": 1.5,
+        "away_spread_odd": 2.7,
+        "away_spread_point": -1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8.5
+      },
+      "betmgm": {
+        "home_ml": 1.77,
+        "away_ml": 2.05,
+        "home_spread_odd": 2.65,
+        "home_spread_point": -1.5,
+        "away_spread_odd": 1.5,
+        "away_spread_point": 1.5,
+        "total_over_odd": 1.95,
+        "total_under_odd": 1.87,
+        "total_point": 8.5
+      }
+    },
+    "sabermetrics": {
+      "away_starter": {
+        "name": "Framber Valdez",
+        "handedness": "LHP",
+        "SIERA": 5.1,
+        "FIP": 5.65,
+        "BB9": 3
+      },
+      "home_starter": {
+        "name": "Tyler Anderson",
+        "handedness": "LHP",
+        "SIERA": 4.92,
+        "FIP": 5.47,
+        "BB9": 3
+      },
+      "away_offense": {
+        "wRC_vs_LHP": 103,
+        "wRC_vs_RHP": 99,
+        "last_3_days_bullpen_pitches": 35
+      },
+      "home_offense": {
+        "wRC_vs_LHP": 99,
+        "wRC_vs_RHP": 95,
+        "last_3_days_bullpen_pitches": 51
+      },
+      "park_factor": {
+        "run_modifier": 0.98,
+        "hr_modifier": 0.99
+      }
+    }
+  }
+]
