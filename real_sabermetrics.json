@@ -1,16 +1,18 @@
 {
     "Baltimore Orioles": {
         "starter": {
-            "name": "Corbin Burnes",
-            "handedness": "RHP",
-            "SIERA": 4.76,
-            "FIP": 5.31,
-            "BB9": 3.0
+            "name": "Trevor Rogers",
+            "handedness": "LHP",
+            "SIERA": 4.44,
+            "FIP": 4.44,
+            "BB9": 3.0,
+            "K9": 6.6,
+            "HR9": 1.35
         },
         "offense": {
-            "wRC_vs_LHP": 101,
-            "wRC_vs_RHP": 97,
-            "last_3_days_bullpen_pitches": 51
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 102,
+            "last_3_days_bullpen_pitches": 171
         },
         "park_factor": {
             "run_modifier": 0.98,
@@ -19,524 +21,582 @@
     },
     "Seattle Mariners": {
         "starter": {
-            "name": "George Kirby",
+            "name": "Logan Gilbert",
             "handedness": "RHP",
-            "SIERA": 3.64,
-            "FIP": 4.19,
-            "BB9": 3.0
+            "SIERA": 4.07,
+            "FIP": 4.07,
+            "BB9": 2.15,
+            "K9": 9.26,
+            "HR9": 1.47
         },
         "offense": {
-            "wRC_vs_LHP": 101,
-            "wRC_vs_RHP": 97,
-            "last_3_days_bullpen_pitches": 51
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 105,
+            "last_3_days_bullpen_pitches": 197
         },
         "park_factor": {
             "run_modifier": 0.92,
             "hr_modifier": 0.94
         }
     },
-    "Boston Red Sox": {
+    "Pittsburgh Pirates": {
         "starter": {
-            "name": "Lucas Giolito",
+            "name": "Paul Skenes",
             "handedness": "RHP",
-            "SIERA": 4.04,
-            "FIP": 4.59,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 97,
-            "wRC_vs_RHP": 93,
-            "last_3_days_bullpen_pitches": 51
-        },
-        "park_factor": {
-            "run_modifier": 1.07,
-            "hr_modifier": 1.05
-        }
-    },
-    "New York Yankees": {
-        "starter": {
-            "name": "Gerrit Cole",
-            "handedness": "RHP",
-            "SIERA": 3.41,
-            "FIP": 3.96,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 107,
-            "wRC_vs_RHP": 103,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 1.0,
-            "hr_modifier": 1.08
-        }
-    },
-    "Tampa Bay Rays": {
-        "starter": {
-            "name": "Shane McClanahan",
-            "handedness": "LHP",
-            "SIERA": 4.05,
-            "FIP": 4.6,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 101,
-            "wRC_vs_RHP": 97,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 0.95,
-            "hr_modifier": 0.9
-        }
-    },
-    "Toronto Blue Jays": {
-        "starter": {
-            "name": "Kevin Gausman",
-            "handedness": "RHP",
-            "SIERA": 4.18,
-            "FIP": 4.73,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 98,
-            "wRC_vs_RHP": 94,
-            "last_3_days_bullpen_pitches": 51
-        },
-        "park_factor": {
-            "run_modifier": 1.02,
-            "hr_modifier": 1.03
-        }
-    },
-    "Chicago White Sox": {
-        "starter": {
-            "name": "Garrett Crochet",
-            "handedness": "LHP",
-            "SIERA": 4.51,
-            "FIP": 5.06,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 104,
-            "wRC_vs_RHP": 100,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 0.99,
-            "hr_modifier": 1.04
-        }
-    },
-    "Cleveland Guardians": {
-        "starter": {
-            "name": "Tanner Bibee",
-            "handedness": "RHP",
-            "SIERA": 3.93,
-            "FIP": 4.48,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 97,
-            "wRC_vs_RHP": 93,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 0.97,
-            "hr_modifier": 0.93
-        }
-    },
-    "Detroit Tigers": {
-        "starter": {
-            "name": "Tarik Skubal",
-            "handedness": "LHP",
-            "SIERA": 4.18,
-            "FIP": 4.73,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 99,
-            "wRC_vs_RHP": 95,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 0.96,
-            "hr_modifier": 0.92
-        }
-    },
-    "Kansas City Royals": {
-        "starter": {
-            "name": "Cole Ragans",
-            "handedness": "LHP",
-            "SIERA": 4.54,
-            "FIP": 5.09,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 97,
-            "wRC_vs_RHP": 93,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 0.98,
-            "hr_modifier": 0.94
-        }
-    },
-    "Minnesota Twins": {
-        "starter": {
-            "name": "Pablo L\u00f3pez",
-            "handedness": "RHP",
-            "SIERA": 4.84,
-            "FIP": 5.39,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 99,
-            "wRC_vs_RHP": 95,
-            "last_3_days_bullpen_pitches": 51
-        },
-        "park_factor": {
-            "run_modifier": 1.01,
-            "hr_modifier": 1.02
-        }
-    },
-    "Houston Astros": {
-        "starter": {
-            "name": "Framber Valdez",
-            "handedness": "LHP",
-            "SIERA": 5.1,
-            "FIP": 5.65,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 103,
-            "wRC_vs_RHP": 99,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 1.02,
-            "hr_modifier": 1.05
-        }
-    },
-    "Los Angeles Angels": {
-        "starter": {
-            "name": "Tyler Anderson",
-            "handedness": "LHP",
-            "SIERA": 4.92,
-            "FIP": 5.47,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 99,
-            "wRC_vs_RHP": 95,
-            "last_3_days_bullpen_pitches": 51
-        },
-        "park_factor": {
-            "run_modifier": 0.98,
-            "hr_modifier": 0.99
-        }
-    },
-    "Oakland Athletics": {
-        "starter": {
-            "name": "JP Sears",
-            "handedness": "LHP",
-            "SIERA": 4.16,
-            "FIP": 4.71,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 103,
-            "wRC_vs_RHP": 99,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 0.95,
-            "hr_modifier": 0.91
-        }
-    },
-    "Texas Rangers": {
-        "starter": {
-            "name": "Nathan Eovaldi",
-            "handedness": "RHP",
-            "SIERA": 3.85,
-            "FIP": 4.4,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 98,
-            "wRC_vs_RHP": 94,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 1.02,
-            "hr_modifier": 1.04
-        }
-    },
-    "Atlanta Braves": {
-        "starter": {
-            "name": "Spencer Strider",
-            "handedness": "RHP",
-            "SIERA": 3.38,
-            "FIP": 3.93,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 106,
-            "wRC_vs_RHP": 102,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 1.03,
-            "hr_modifier": 1.06
-        }
-    },
-    "Miami Marlins": {
-        "starter": {
-            "name": "Jes\u00fas Luzardo",
-            "handedness": "LHP",
-            "SIERA": 4.41,
-            "FIP": 4.96,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 99,
-            "wRC_vs_RHP": 95,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 0.97,
-            "hr_modifier": 0.92
-        }
-    },
-    "New York Mets": {
-        "starter": {
-            "name": "Kodai Senga",
-            "handedness": "RHP",
-            "SIERA": 3.96,
-            "FIP": 4.51,
-            "BB9": 3.0
+            "SIERA": 3.09,
+            "FIP": 3.09,
+            "BB9": 1.78,
+            "K9": 10.54,
+            "HR9": 0.71
         },
         "offense": {
             "wRC_vs_LHP": 93,
-            "wRC_vs_RHP": 89,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 0.99,
-            "hr_modifier": 0.97
-        }
-    },
-    "Philadelphia Phillies": {
-        "starter": {
-            "name": "Zack Wheeler",
-            "handedness": "RHP",
-            "SIERA": 4.17,
-            "FIP": 4.72,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 96,
-            "wRC_vs_RHP": 92,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 1.01,
-            "hr_modifier": 1.03
-        }
-    },
-    "Washington Nationals": {
-        "starter": {
-            "name": "MacKenzie Gore",
-            "handedness": "LHP",
-            "SIERA": 4.72,
-            "FIP": 5.27,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 104,
-            "wRC_vs_RHP": 100,
-            "last_3_days_bullpen_pitches": 51
-        },
-        "park_factor": {
-            "run_modifier": 1.0,
-            "hr_modifier": 0.98
-        }
-    },
-    "Chicago Cubs": {
-        "starter": {
-            "name": "Justin Steele",
-            "handedness": "LHP",
-            "SIERA": 4.51,
-            "FIP": 5.06,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 101,
-            "wRC_vs_RHP": 97,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 0.98,
-            "hr_modifier": 0.96
-        }
-    },
-    "Cincinnati Reds": {
-        "starter": {
-            "name": "Hunter Greene",
-            "handedness": "RHP",
-            "SIERA": 5.01,
-            "FIP": 5.56,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 99,
-            "wRC_vs_RHP": 95,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 1.05,
-            "hr_modifier": 1.12
-        }
-    },
-    "Milwaukee Brewers": {
-        "starter": {
-            "name": "Freddy Peralta",
-            "handedness": "RHP",
-            "SIERA": 3.59,
-            "FIP": 4.14,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 102,
-            "wRC_vs_RHP": 98,
-            "last_3_days_bullpen_pitches": 51
-        },
-        "park_factor": {
-            "run_modifier": 1.01,
-            "hr_modifier": 1.04
-        }
-    },
-    "Pittsburgh Pirates": {
-        "starter": {
-            "name": "Mitch Keller",
-            "handedness": "RHP",
-            "SIERA": 4.27,
-            "FIP": 4.82,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 103,
-            "wRC_vs_RHP": 99,
-            "last_3_days_bullpen_pitches": 43
+            "wRC_vs_RHP": 105,
+            "last_3_days_bullpen_pitches": 157
         },
         "park_factor": {
             "run_modifier": 0.98,
             "hr_modifier": 0.95
         }
     },
-    "St. Louis Cardinals": {
-        "starter": {
-            "name": "Sonny Gray",
-            "handedness": "RHP",
-            "SIERA": 4.19,
-            "FIP": 4.74,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 100,
-            "wRC_vs_RHP": 96,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 0.99,
-            "hr_modifier": 0.96
-        }
-    },
-    "Arizona Diamondbacks": {
-        "starter": {
-            "name": "Zac Gallen",
-            "handedness": "RHP",
-            "SIERA": 4.4,
-            "FIP": 4.95,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 98,
-            "wRC_vs_RHP": 94,
-            "last_3_days_bullpen_pitches": 35
-        },
-        "park_factor": {
-            "run_modifier": 1.02,
-            "hr_modifier": 1.01
-        }
-    },
-    "Colorado Rockies": {
-        "starter": {
-            "name": "Kyle Freeland",
-            "handedness": "LHP",
-            "SIERA": 5.74,
-            "FIP": 6.0,
-            "BB9": 3.0
-        },
-        "offense": {
-            "wRC_vs_LHP": 100,
-            "wRC_vs_RHP": 96,
-            "last_3_days_bullpen_pitches": 43
-        },
-        "park_factor": {
-            "run_modifier": 1.32,
-            "hr_modifier": 1.28
-        }
-    },
     "Los Angeles Dodgers": {
         "starter": {
-            "name": "Tyler Glasnow",
-            "handedness": "RHP",
-            "SIERA": 3.33,
-            "FIP": 3.88,
-            "BB9": 3.0
+            "name": "Eric Lauer",
+            "handedness": "LHP",
+            "SIERA": 5.46,
+            "FIP": 5.46,
+            "BB9": 3.08,
+            "K9": 6.15,
+            "HR9": 2.56
         },
         "offense": {
-            "wRC_vs_LHP": 110,
-            "wRC_vs_RHP": 106,
-            "last_3_days_bullpen_pitches": 43
+            "wRC_vs_LHP": 102,
+            "wRC_vs_RHP": 112,
+            "last_3_days_bullpen_pitches": 169
         },
         "park_factor": {
             "run_modifier": 0.98,
             "hr_modifier": 1.02
         }
     },
-    "San Diego Padres": {
+    "Tampa Bay Rays": {
         "starter": {
-            "name": "Yu Darvish",
+            "name": "Nick Martinez",
             "handedness": "RHP",
-            "SIERA": 4.09,
-            "FIP": 4.64,
-            "BB9": 3.0
+            "SIERA": 3.75,
+            "FIP": 3.75,
+            "BB9": 1.51,
+            "K9": 5.1,
+            "HR9": 0.7
+        },
+        "offense": {
+            "wRC_vs_LHP": 95,
+            "wRC_vs_RHP": 102,
+            "last_3_days_bullpen_pitches": 184
+        },
+        "park_factor": {
+            "run_modifier": 0.95,
+            "hr_modifier": 0.9
+        }
+    },
+    "Boston Red Sox": {
+        "starter": {
+            "name": "Payton Tolle",
+            "handedness": "LHP",
+            "SIERA": 3.32,
+            "FIP": 3.32,
+            "BB9": 2.36,
+            "K9": 9.11,
+            "HR9": 0.51
+        },
+        "offense": {
+            "wRC_vs_LHP": 101,
+            "wRC_vs_RHP": 93,
+            "last_3_days_bullpen_pitches": 104
+        },
+        "park_factor": {
+            "run_modifier": 1.07,
+            "hr_modifier": 1.05
+        }
+    },
+    "Detroit Tigers": {
+        "starter": {
+            "name": "Troy Melton",
+            "handedness": "RHP",
+            "SIERA": 4.62,
+            "FIP": 4.62,
+            "BB9": 2.1,
+            "K9": 4.91,
+            "HR9": 1.75
+        },
+        "offense": {
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 98,
+            "last_3_days_bullpen_pitches": 120
+        },
+        "park_factor": {
+            "run_modifier": 0.96,
+            "hr_modifier": 0.92
+        }
+    },
+    "Minnesota Twins": {
+        "starter": {
+            "name": "Taj Bradley",
+            "handedness": "RHP",
+            "SIERA": 4.11,
+            "FIP": 4.11,
+            "BB9": 4.02,
+            "K9": 10.11,
+            "HR9": 1.25
+        },
+        "offense": {
+            "wRC_vs_LHP": 92,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 135
+        },
+        "park_factor": {
+            "run_modifier": 1.01,
+            "hr_modifier": 1.02
+        }
+    },
+    "Miami Marlins": {
+        "starter": {
+            "name": "Max Meyer",
+            "handedness": "RHP",
+            "SIERA": 3.63,
+            "FIP": 3.63,
+            "BB9": 3.3,
+            "K9": 9.8,
+            "HR9": 0.8
+        },
+        "offense": {
+            "wRC_vs_LHP": 99,
+            "wRC_vs_RHP": 97,
+            "last_3_days_bullpen_pitches": 173
+        },
+        "park_factor": {
+            "run_modifier": 0.97,
+            "hr_modifier": 0.92
+        }
+    },
+    "Arizona Diamondbacks": {
+        "starter": {
+            "name": "Zac Gallen",
+            "handedness": "RHP",
+            "SIERA": 4.57,
+            "FIP": 4.57,
+            "BB9": 2.71,
+            "K9": 5.94,
+            "HR9": 1.42
+        },
+        "offense": {
+            "wRC_vs_LHP": 107,
+            "wRC_vs_RHP": 93,
+            "last_3_days_bullpen_pitches": 77
+        },
+        "park_factor": {
+            "run_modifier": 1.02,
+            "hr_modifier": 1.01
+        }
+    },
+    "Cleveland Guardians": {
+        "starter": {
+            "name": "Slade Cecconi",
+            "handedness": "RHP",
+            "SIERA": 4.23,
+            "FIP": 4.23,
+            "BB9": 2.85,
+            "K9": 7.56,
+            "HR9": 1.24
+        },
+        "offense": {
+            "wRC_vs_LHP": 99,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 155
+        },
+        "park_factor": {
+            "run_modifier": 0.97,
+            "hr_modifier": 0.93
+        }
+    },
+    "New York Yankees": {
+        "starter": {
+            "name": "Gerrit Cole",
+            "handedness": "RHP",
+            "SIERA": 4.16,
+            "FIP": 4.16,
+            "BB9": 2.45,
+            "K9": 7.36,
+            "HR9": 1.23
+        },
+        "offense": {
+            "wRC_vs_LHP": 111,
+            "wRC_vs_RHP": 104,
+            "last_3_days_bullpen_pitches": 152
+        },
+        "park_factor": {
+            "run_modifier": 1.0,
+            "hr_modifier": 1.08
+        }
+    },
+    "Toronto Blue Jays": {
+        "starter": {
+            "name": "Dylan Cease",
+            "handedness": "RHP",
+            "SIERA": 3.01,
+            "FIP": 3.01,
+            "BB9": 3.57,
+            "K9": 13.63,
+            "HR9": 0.66
+        },
+        "offense": {
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 265
+        },
+        "park_factor": {
+            "run_modifier": 1.02,
+            "hr_modifier": 1.03
+        }
+    },
+    "Philadelphia Phillies": {
+        "starter": {
+            "name": "Zack Wheeler",
+            "handedness": "RHP",
+            "SIERA": 3.81,
+            "FIP": 3.81,
+            "BB9": 1.91,
+            "K9": 8.42,
+            "HR9": 1.11
+        },
+        "offense": {
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 95,
+            "last_3_days_bullpen_pitches": 170
+        },
+        "park_factor": {
+            "run_modifier": 1.01,
+            "hr_modifier": 1.03
+        }
+    },
+    "New York Mets": {
+        "starter": {
+            "name": "Freddy Peralta",
+            "handedness": "RHP",
+            "SIERA": 4.13,
+            "FIP": 4.13,
+            "BB9": 3.69,
+            "K9": 9.12,
+            "HR9": 1.15
+        },
+        "offense": {
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 92,
+            "last_3_days_bullpen_pitches": 165
+        },
+        "park_factor": {
+            "run_modifier": 0.99,
+            "hr_modifier": 0.97
+        }
+    },
+    "St. Louis Cardinals": {
+        "starter": {
+            "name": "Dustin May",
+            "handedness": "RHP",
+            "SIERA": 3.54,
+            "FIP": 3.54,
+            "BB9": 2.48,
+            "K9": 8.17,
+            "HR9": 0.62
+        },
+        "offense": {
+            "wRC_vs_LHP": 98,
+            "wRC_vs_RHP": 99,
+            "last_3_days_bullpen_pitches": 114
+        },
+        "park_factor": {
+            "run_modifier": 0.99,
+            "hr_modifier": 0.96
+        }
+    },
+    "Kansas City Royals": {
+        "starter": {
+            "name": "Stephen Kolek",
+            "handedness": "RHP",
+            "SIERA": 4.02,
+            "FIP": 4.02,
+            "BB9": 1.88,
+            "K9": 6.28,
+            "HR9": 1.05
+        },
+        "offense": {
+            "wRC_vs_LHP": 95,
+            "wRC_vs_RHP": 97,
+            "last_3_days_bullpen_pitches": 118
+        },
+        "park_factor": {
+            "run_modifier": 0.98,
+            "hr_modifier": 0.94
+        }
+    },
+    "Texas Rangers": {
+        "starter": {
+            "name": "Nathan Eovaldi",
+            "handedness": "RHP",
+            "SIERA": 4.43,
+            "FIP": 4.43,
+            "BB9": 2.24,
+            "K9": 8.63,
+            "HR9": 1.68
+        },
+        "offense": {
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 97,
+            "last_3_days_bullpen_pitches": 111
+        },
+        "park_factor": {
+            "run_modifier": 1.02,
+            "hr_modifier": 1.04
+        }
+    },
+    "Chicago White Sox": {
+        "starter": {
+            "name": "Brandon Eisert",
+            "handedness": "LHP",
+            "SIERA": 4.08,
+            "FIP": 4.08,
+            "BB9": 3.68,
+            "K9": 9.82,
+            "HR9": 1.23
+        },
+        "offense": {
+            "wRC_vs_LHP": 107,
+            "wRC_vs_RHP": 101,
+            "last_3_days_bullpen_pitches": 287
+        },
+        "park_factor": {
+            "run_modifier": 0.99,
+            "hr_modifier": 1.04
+        }
+    },
+    "Atlanta Braves": {
+        "starter": {
+            "name": "Grant Holmes",
+            "handedness": "RHP",
+            "SIERA": 4.84,
+            "FIP": 4.84,
+            "BB9": 3.91,
+            "K9": 7.96,
+            "HR9": 1.75
+        },
+        "offense": {
+            "wRC_vs_LHP": 103,
+            "wRC_vs_RHP": 106,
+            "last_3_days_bullpen_pitches": 149
+        },
+        "park_factor": {
+            "run_modifier": 1.03,
+            "hr_modifier": 1.06
+        }
+    },
+    "Colorado Rockies": {
+        "starter": {
+            "name": "Tomoyuki Sugano",
+            "handedness": "RHP",
+            "SIERA": 4.81,
+            "FIP": 4.81,
+            "BB9": 2.63,
+            "K9": 5.14,
+            "HR9": 1.58
         },
         "offense": {
             "wRC_vs_LHP": 91,
-            "wRC_vs_RHP": 87,
-            "last_3_days_bullpen_pitches": 35
+            "wRC_vs_RHP": 101,
+            "last_3_days_bullpen_pitches": 197
+        },
+        "park_factor": {
+            "run_modifier": 1.32,
+            "hr_modifier": 1.28
+        }
+    },
+    "Chicago Cubs": {
+        "starter": {
+            "name": "Colin Rea",
+            "handedness": "RHP",
+            "SIERA": 4.6,
+            "FIP": 4.6,
+            "BB9": 3.25,
+            "K9": 7.01,
+            "HR9": 1.43
+        },
+        "offense": {
+            "wRC_vs_LHP": 99,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 195
+        },
+        "park_factor": {
+            "run_modifier": 0.98,
+            "hr_modifier": 0.96
+        }
+    },
+    "Los Angeles Angels": {
+        "starter": {
+            "name": "Walbert Ure\u00f1a",
+            "handedness": "RHP",
+            "SIERA": 4.06,
+            "FIP": 4.06,
+            "BB9": 5.37,
+            "K9": 8.95,
+            "HR9": 0.65
+        },
+        "offense": {
+            "wRC_vs_LHP": 98,
+            "wRC_vs_RHP": 97,
+            "last_3_days_bullpen_pitches": 276
+        },
+        "park_factor": {
+            "run_modifier": 0.98,
+            "hr_modifier": 0.99
+        }
+    },
+    "Houston Astros": {
+        "starter": {
+            "name": "Kai-Wei Teng",
+            "handedness": "RHP",
+            "SIERA": 4.26,
+            "FIP": 4.26,
+            "BB9": 4.24,
+            "K9": 8.65,
+            "HR9": 1.06
+        },
+        "offense": {
+            "wRC_vs_LHP": 106,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 178
+        },
+        "park_factor": {
+            "run_modifier": 1.02,
+            "hr_modifier": 1.05
+        }
+    },
+    "San Diego Padres": {
+        "starter": {
+            "name": "Lucas Giolito",
+            "handedness": "RHP",
+            "SIERA": 4.91,
+            "FIP": 4.91,
+            "BB9": 7.84,
+            "K9": 6.1,
+            "HR9": 1.31
+        },
+        "offense": {
+            "wRC_vs_LHP": 100,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 205
         },
         "park_factor": {
             "run_modifier": 0.96,
             "hr_modifier": 0.94
         }
     },
-    "San Francisco Giants": {
+    "Cincinnati Reds": {
         "starter": {
-            "name": "Logan Webb",
+            "name": "Chase Burns",
             "handedness": "RHP",
-            "SIERA": 4.61,
-            "FIP": 5.16,
-            "BB9": 3.0
+            "SIERA": 3.55,
+            "FIP": 3.55,
+            "BB9": 2.74,
+            "K9": 10.47,
+            "HR9": 1.07
         },
         "offense": {
-            "wRC_vs_LHP": 101,
+            "wRC_vs_LHP": 102,
             "wRC_vs_RHP": 97,
-            "last_3_days_bullpen_pitches": 51
+            "last_3_days_bullpen_pitches": 184
+        },
+        "park_factor": {
+            "run_modifier": 1.05,
+            "hr_modifier": 1.12
+        }
+    },
+    "San Francisco Giants": {
+        "starter": {
+            "name": "Adrian Houser",
+            "handedness": "RHP",
+            "SIERA": 4.78,
+            "FIP": 4.78,
+            "BB9": 3.32,
+            "K9": 6.37,
+            "HR9": 1.52
+        },
+        "offense": {
+            "wRC_vs_LHP": 98,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 158
         },
         "park_factor": {
             "run_modifier": 0.94,
             "hr_modifier": 0.88
+        }
+    },
+    "Washington Nationals": {
+        "starter": {
+            "name": "Andrew Alvarez",
+            "handedness": "LHP",
+            "SIERA": 3.86,
+            "FIP": 3.86,
+            "BB9": 4.07,
+            "K9": 9.62,
+            "HR9": 0.74
+        },
+        "offense": {
+            "wRC_vs_LHP": 108,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 224
+        },
+        "park_factor": {
+            "run_modifier": 1.0,
+            "hr_modifier": 0.98
+        }
+    },
+    "Athletics": {
+        "starter": {
+            "name": "J.T. Ginn",
+            "handedness": "RHP",
+            "SIERA": 4.16,
+            "FIP": 4.16,
+            "BB9": 3.79,
+            "K9": 8.2,
+            "HR9": 1.01
+        },
+        "offense": {
+            "wRC_vs_LHP": 103,
+            "wRC_vs_RHP": 100,
+            "last_3_days_bullpen_pitches": 277
+        },
+        "park_factor": {
+            "run_modifier": 0.95,
+            "hr_modifier": 0.91
+        }
+    },
+    "Milwaukee Brewers": {
+        "starter": {
+            "name": "Robert Gasser",
+            "handedness": "LHP",
+            "SIERA": 5.12,
+            "FIP": 5.12,
+            "BB9": 4.42,
+            "K9": 9.33,
+            "HR9": 2.95
+        },
+        "offense": {
+            "wRC_vs_LHP": 92,
+            "wRC_vs_RHP": 105,
+            "last_3_days_bullpen_pitches": 207
+        },
+        "park_factor": {
+            "run_modifier": 1.01,
+            "hr_modifier": 1.04
         }
     }
 }

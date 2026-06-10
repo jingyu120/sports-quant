@@ -1,3 +1,5 @@
 .env
 node_modules
 .venv/
+/quantslate_payload.json
+/real_sabermetrics.json

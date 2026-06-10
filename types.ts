@@ -28,7 +28,7 @@ export interface Outcome {
 }
 
 export interface SabermetricProfile {
-    starter: { name: string; SIERA: number; FIP: number; BB9: number };
+    starter: { name: string; handedness: string; SIERA: number; FIP: number; BB9: number };
     offense: { wRC_vs_LHP: number; wRC_vs_RHP: number; last_3_days_bullpen_pitches: number };
     park_factor: { run_modifier: number; hr_modifier: number };
 }

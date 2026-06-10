@@ -9,6 +9,12 @@ const ODDS_API_URL = 'https://api.the-odds-api.com/v4/sports/baseball_mlb/odds/'
 const API_KEY = process.env.ODDS_API_KEY;
 const TARGET_BOOKMAKERS = 'fanduel,draftkings,betmgm,bovada';
 const MARKETS = 'h2h,spreads,totals';
+const MODEL_WEIGHT = 0.30; // 30% model, 70% market to shrink projected probabilities to Vegas efficiency
+// Minimum edge required to surface a bet. Override with MIN_EV (decimal, e.g. MIN_EV=0.02 = 2%).
+// Lower = more bets but thinner/noisier edges; higher = fewer but higher-conviction plays.
+const MIN_EV = process.env.MIN_EV !== undefined ? parseFloat(process.env.MIN_EV) : 0.03;
+// Max rows in the final ranked slate table. Override with MAX_BETS (e.g. MAX_BETS=15).
+const MAX_BETS = process.env.MAX_BETS !== undefined ? parseInt(process.env.MAX_BETS, 10) : 10;
 
 /**
  * Fetches real-time market lines from The Odds API.
@@ -58,6 +64,72 @@ function fetchSabermetrics(teamName: string): SabermetricProfile | null {
  * Parses and flattens the Odds API structure into the dense JSON
  * required by the QuantSlate AI Terminal.
  */
+/**
+ * Approximation of the standard normal cumulative distribution function (CDF)
+ */
+function normalCDF(z: number): number {
+    return 1.0 / (1.0 + Math.exp(-0.07056 * Math.pow(z, 3) - 1.5976 * z));
+}
+
+/**
+ * Calculates projected runs for both away and home teams based on SIERA, wRC+, bullpen fatigue, and park factor.
+ */
+function calculateProjectedRuns(
+    awayStarter: any,
+    homeStarter: any,
+    awayOffense: any,
+    homeOffense: any,
+    parkFactor: any
+): { awayRuns: number; homeRuns: number } {
+    // 1. Starter vs. Bullpen Weighting (Starter 60%, Bullpen 40% assumed at league average SIERA of 4.00)
+    const awayStarterSiera = awayStarter.SIERA || 4.0;
+    const homeStarterSiera = homeStarter.SIERA || 4.0;
+    const awayPitchingSiera = 0.60 * awayStarterSiera + 1.60;
+    const homePitchingSiera = 0.60 * homeStarterSiera + 1.60;
+
+    // 2. Dampened Pitching SIERA Factor (relative to 4.0 league average, scaled by 0.20 to avoid over-exaggeration)
+    const awayStarterSieraFactor = 1.0 + (awayPitchingSiera - 4.0) * 0.20;
+    const homeStarterSieraFactor = 1.0 + (homePitchingSiera - 4.0) * 0.20;
+
+    // 3. Dampened Offense wRC+ Factor (relative to 100 average, scaled by 0.005)
+    const awayWrc = homeStarter.handedness === 'LHP' ? (awayOffense.wRC_vs_LHP || 100) : (awayOffense.wRC_vs_RHP || 100);
+    const homeWrc = awayStarter.handedness === 'LHP' ? (homeOffense.wRC_vs_LHP || 100) : (homeOffense.wRC_vs_RHP || 100);
+    const awayOffenseFactor = 1.0 + (awayWrc - 100) * 0.005;
+    const homeOffenseFactor = 1.0 + (homeWrc - 100) * 0.005;
+
+    // 4. Bullpen Fatigue Factor (centered on the league-average trailing-3-day
+    // bullpen pitch count of ~120; a more worked pen concedes more runs)
+    const awayBpFactor = 1.0 + ((awayOffense.last_3_days_bullpen_pitches || 120) - 120) * 0.001;
+    const homeBpFactor = 1.0 + ((homeOffense.last_3_days_bullpen_pitches || 120) - 120) * 0.001;
+
+    // 5. Park Factor (Dampened by 50% to prevent double-counting of park effects already in pitcher SIERAs)
+    const rawRunModifier = parkFactor.run_modifier || 1.0;
+    const runModifier = 1.0 + (rawRunModifier - 1.0) * 0.5;
+
+    // 6. Base runs per game per team (league average 4.5 runs)
+    const baseAwayRuns = 4.5 * awayOffenseFactor * homeStarterSieraFactor * homeBpFactor * runModifier;
+    const baseHomeRuns = 4.5 * homeOffenseFactor * awayStarterSieraFactor * awayBpFactor * runModifier * 1.04; // 4% Home Field Advantage
+
+    return {
+        awayRuns: baseAwayRuns,
+        homeRuns: baseHomeRuns
+    };
+}
+
+interface BetOpportunity {
+    bet_type_line: string;
+    best_bookmaker: string;
+    model_prob: string;
+    market_prob: string;
+    ev: string;
+    kelly_stake: string;
+    raw_ev: number;
+}
+
+/**
+ * Parses and flattens the Odds API structure into the dense JSON
+ * required by the QuantSlate AI Terminal.
+ */
 function compilePayload(games: OddsApiGame[]): any[] {
     const payload: any[] = [];
     const now = new Date();
@@ -85,14 +157,14 @@ function compilePayload(games: OddsApiGame[]): any[] {
                 const homeOutcome = h2h.outcomes.find(o => o.name === game.home_team);
                 const awayOutcome = h2h.outcomes.find(o => o.name === game.away_team);
 
-                // Guardrail: Skip if odds are wildly outside normal pre-match baseball boundaries (< 1.1 or > 5.0)
                 if (homeOutcome && awayOutcome) {
-                    if (homeOutcome.price > 5.0 || awayOutcome.price > 5.0) {
-                        console.warn(`[Vig Warning] Skipping highly anomalous outlier line for ${game.home_team}: ${homeOutcome.price} / ${awayOutcome.price}`);
-                        continue; 
+                    // Safe Guardrail: Only apply to the h2h object, do not continue the outer bookie loop
+                    if (homeOutcome.price <= 5.0 && awayOutcome.price <= 5.0) {
+                        market_data[bookie.key].home_ml = homeOutcome.price;
+                        market_data[bookie.key].away_ml = awayOutcome.price;
+                    } else {
+                        console.warn(`[ML Warning] Skipping out-of-bounds Moneyline for ${game.home_team}: ${homeOutcome.price}`);
                     }
-                    market_data[bookie.key].home_ml = homeOutcome.price;
-                    market_data[bookie.key].away_ml = awayOutcome.price;
                 }
             }
 
@@ -112,31 +184,310 @@ function compilePayload(games: OddsApiGame[]): any[] {
 
             // 4. ROBUST TOTALS EXTRACTION
             const totals = bookie.markets.find(m => m.key === 'totals');
-            if (totals && totals.outcomes.length === 2) {
-                const overOutcome = totals.outcomes.find(o => o.name.toLowerCase() === 'over');
-                const underOutcome = totals.outcomes.find(o => o.name.toLowerCase() === 'under');
+            if (totals && totals.outcomes.length >= 2) {
+                const linesMap: Record<number, { over?: number; under?: number }> = {};
+                
+                totals.outcomes.forEach(o => {
+                    const pt = o.point;
+                    if (pt === undefined) return;
+                    if (!linesMap[pt]) linesMap[pt] = {};
+                    
+                    if (o.name.toLowerCase() === 'over') linesMap[pt].over = o.price;
+                    if (o.name.toLowerCase() === 'under') linesMap[pt].under = o.price;
+                });
 
-                if (overOutcome && underOutcome) {
-                    market_data[bookie.key].total_over_odd = overOutcome.price;
-                    market_data[bookie.key].total_under_odd = underOutcome.price;
-                    market_data[bookie.key].total_point = overOutcome.point;
+                let bestPoint: number | null = null;
+                let minDiff = Infinity;
+
+                for (const [pointStr, prices] of Object.entries(linesMap)) {
+                    if (prices.over && prices.under) {
+                        const diff = Math.abs(prices.over - prices.under);
+                        const point = parseFloat(pointStr);
+                        // Main lines hold standard vigorish spreads closest to matching numbers (e.g., 1.91 / 1.91)
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            bestPoint = point;
+                        }
+                    }
+                }
+
+                if (bestPoint !== null) {
+                    market_data[bookie.key].total_over_odd = linesMap[bestPoint].over;
+                    market_data[bookie.key].total_under_odd = linesMap[bestPoint].under;
+                    market_data[bookie.key].total_point = bestPoint; 
                 }
             }
         }
 
         // Only append matchups that contain successfully structured market variables
         if (Object.keys(market_data).length > 0) {
+            // Run Model Calculations
+            const { awayRuns, homeRuns } = calculateProjectedRuns(
+                awayMetrics.starter,
+                homeMetrics.starter,
+                awayMetrics.offense,
+                homeMetrics.offense,
+                homeMetrics.park_factor
+            );
+
+            const projectedTotalRuns = awayRuns + homeRuns;
+            const projectedRunDiff = homeRuns - awayRuns;
+
+            // Pythagorean Win Expectations
+            const exp = 1.83;
+            const awayExp = Math.pow(awayRuns, exp);
+            const homeExp = Math.pow(homeRuns, exp);
+            const modelProbAwayML = awayExp / (awayExp + homeExp);
+            const modelProbHomeML = homeExp / (awayExp + homeExp);
+
+            const calculatedBets: BetOpportunity[] = [];
+
+            // 1. Moneyline
+            let bestHomeMlOdd = 0;
+            let bestHomeMlBook = '';
+            let bestAwayMlOdd = 0;
+            let bestAwayMlBook = '';
+
+            for (const [bookieName, data] of Object.entries(market_data)) {
+                if (data.home_ml && data.home_ml > bestHomeMlOdd) {
+                    bestHomeMlOdd = data.home_ml;
+                    bestHomeMlBook = bookieName;
+                }
+                if (data.away_ml && data.away_ml > bestAwayMlOdd) {
+                    bestAwayMlOdd = data.away_ml;
+                    bestAwayMlBook = bookieName;
+                }
+            }
+
+            if (bestHomeMlOdd > 0) {
+                const data = market_data[bestHomeMlBook];
+                if (data.home_ml && data.away_ml) {
+                    const impliedHome = 1.0 / data.home_ml;
+                    const impliedAway = 1.0 / data.away_ml;
+                    const marketProbHome = impliedHome / (impliedHome + impliedAway);
+                    // Shrink model probability towards market probability
+                    const modelProbHomeMLShrunk = MODEL_WEIGHT * modelProbHomeML + (1.0 - MODEL_WEIGHT) * marketProbHome;
+                    const ev = (modelProbHomeMLShrunk * bestHomeMlOdd) - 1.0;
+                    if (ev >= MIN_EV) {
+                        const kelly = 0.25 * ev / (bestHomeMlOdd - 1.0);
+                        calculatedBets.push({
+                            bet_type_line: `${game.home_team} ML`,
+                            best_bookmaker: `${bestHomeMlOdd.toFixed(2)} (${bestHomeMlBook})`,
+                            model_prob: `${(modelProbHomeMLShrunk * 100).toFixed(2)}%`,
+                            market_prob: `${(marketProbHome * 100).toFixed(2)}%`,
+                            ev: `${(ev * 100).toFixed(2)}%`,
+                            kelly_stake: `${(kelly * 100).toFixed(2)}%`,
+                            raw_ev: ev
+                        });
+                    }
+                }
+            }
+
+            if (bestAwayMlOdd > 0) {
+                const data = market_data[bestAwayMlBook];
+                if (data.home_ml && data.away_ml) {
+                    const impliedHome = 1.0 / data.home_ml;
+                    const impliedAway = 1.0 / data.away_ml;
+                    const marketProbAway = impliedAway / (impliedHome + impliedAway);
+                    // Shrink model probability towards market probability
+                    const modelProbAwayMLShrunk = MODEL_WEIGHT * modelProbAwayML + (1.0 - MODEL_WEIGHT) * marketProbAway;
+                    const ev = (modelProbAwayMLShrunk * bestAwayMlOdd) - 1.0;
+                    if (ev >= MIN_EV) {
+                        const kelly = 0.25 * ev / (bestAwayMlOdd - 1.0);
+                        calculatedBets.push({
+                            bet_type_line: `${game.away_team} ML`,
+                            best_bookmaker: `${bestAwayMlOdd.toFixed(2)} (${bestAwayMlBook})`,
+                            model_prob: `${(modelProbAwayMLShrunk * 100).toFixed(2)}%`,
+                            market_prob: `${(marketProbAway * 100).toFixed(2)}%`,
+                            ev: `${(ev * 100).toFixed(2)}%`,
+                            kelly_stake: `${(kelly * 100).toFixed(2)}%`,
+                            raw_ev: ev
+                        });
+                    }
+                }
+            }
+
+            // 2. Totals
+            const uniqueTotalPoints = new Set<number>();
+            for (const data of Object.values(market_data)) {
+                if (data.total_point !== undefined) {
+                    uniqueTotalPoints.add(data.total_point);
+                }
+            }
+
+            for (const point of uniqueTotalPoints) {
+                let bestOverOdd = 0;
+                let bestOverBook = '';
+                let bestUnderOdd = 0;
+                let bestUnderBook = '';
+
+                for (const [bookieName, data] of Object.entries(market_data)) {
+                    if (data.total_point === point) {
+                        if (data.total_over_odd && data.total_over_odd > bestOverOdd) {
+                            bestOverOdd = data.total_over_odd;
+                            bestOverBook = bookieName;
+                        }
+                        if (data.total_under_odd && data.total_under_odd > bestUnderOdd) {
+                            bestUnderOdd = data.total_under_odd;
+                            bestUnderBook = bookieName;
+                        }
+                    }
+                }
+
+                const z = (point - projectedTotalRuns) / 4.0;
+                const modelProbUnder = normalCDF(z);
+                const modelProbOver = 1.0 - modelProbUnder;
+
+                if (bestOverOdd > 0) {
+                    const data = market_data[bestOverBook];
+                    if (data.total_over_odd && data.total_under_odd) {
+                        const impliedOver = 1.0 / data.total_over_odd;
+                        const impliedUnder = 1.0 / data.total_under_odd;
+                        const marketProbOver = impliedOver / (impliedOver + impliedUnder);
+                        // Shrink model probability towards market probability
+                        const modelProbOverShrunk = MODEL_WEIGHT * modelProbOver + (1.0 - MODEL_WEIGHT) * marketProbOver;
+                        const ev = (modelProbOverShrunk * bestOverOdd) - 1.0;
+                        if (ev >= MIN_EV) {
+                            const kelly = 0.25 * ev / (bestOverOdd - 1.0);
+                            calculatedBets.push({
+                                bet_type_line: `Total Over ${point}`,
+                                best_bookmaker: `${bestOverOdd.toFixed(2)} (${bestOverBook})`,
+                                model_prob: `${(modelProbOverShrunk * 100).toFixed(2)}%`,
+                                market_prob: `${(marketProbOver * 100).toFixed(2)}%`,
+                                ev: `${(ev * 100).toFixed(2)}%`,
+                                kelly_stake: `${(kelly * 100).toFixed(2)}%`,
+                                raw_ev: ev
+                            });
+                        }
+                    }
+                }
+
+                if (bestUnderOdd > 0) {
+                    const data = market_data[bestUnderBook];
+                    if (data.total_over_odd && data.total_under_odd) {
+                        const impliedOver = 1.0 / data.total_over_odd;
+                        const impliedUnder = 1.0 / data.total_under_odd;
+                        const marketProbUnder = impliedUnder / (impliedOver + impliedUnder);
+                        // Shrink model probability towards market probability
+                        const modelProbUnderShrunk = MODEL_WEIGHT * modelProbUnder + (1.0 - MODEL_WEIGHT) * marketProbUnder;
+                        const ev = (modelProbUnderShrunk * bestUnderOdd) - 1.0;
+                        if (ev >= MIN_EV) {
+                            const kelly = 0.25 * ev / (bestUnderOdd - 1.0);
+                            calculatedBets.push({
+                                bet_type_line: `Total Under ${point}`,
+                                best_bookmaker: `${bestUnderOdd.toFixed(2)} (${bestUnderBook})`,
+                                model_prob: `${(modelProbUnderShrunk * 100).toFixed(2)}%`,
+                                market_prob: `${(marketProbUnder * 100).toFixed(2)}%`,
+                                ev: `${(ev * 100).toFixed(2)}%`,
+                                kelly_stake: `${(kelly * 100).toFixed(2)}%`,
+                                raw_ev: ev
+                            });
+                        }
+                    }
+                }
+            }
+
+            // 3. Spreads
+            const uniqueHomeSpreads = new Set<number>();
+            for (const data of Object.values(market_data)) {
+                if (data.home_spread_point !== undefined) {
+                    uniqueHomeSpreads.add(data.home_spread_point);
+                }
+            }
+
+            for (const spreadPoint of uniqueHomeSpreads) {
+                let bestHomeSpreadOdd = 0;
+                let bestHomeSpreadBook = '';
+                let bestAwaySpreadOdd = 0;
+                let bestAwaySpreadBook = '';
+
+                for (const [bookieName, data] of Object.entries(market_data)) {
+                    if (data.home_spread_point === spreadPoint) {
+                        if (data.home_spread_odd && data.home_spread_odd > bestHomeSpreadOdd) {
+                            bestHomeSpreadOdd = data.home_spread_odd;
+                            bestHomeSpreadBook = bookieName;
+                        }
+                    }
+                    if (data.away_spread_point === -spreadPoint) {
+                        if (data.away_spread_odd && data.away_spread_odd > bestAwaySpreadOdd) {
+                            bestAwaySpreadOdd = data.away_spread_odd;
+                            bestAwaySpreadBook = bookieName;
+                        }
+                    }
+                }
+
+                const zHome = (-spreadPoint - projectedRunDiff) / 4.0;
+                const modelProbHomeSpread = 1.0 - normalCDF(zHome);
+                const modelProbAwaySpread = 1.0 - modelProbHomeSpread;
+
+                if (bestHomeSpreadOdd > 0) {
+                    const data = market_data[bestHomeSpreadBook];
+                    if (data.home_spread_odd && data.away_spread_odd) {
+                        const impliedHome = 1.0 / data.home_spread_odd;
+                        const impliedAway = 1.0 / data.away_spread_odd;
+                        const marketProbHome = impliedHome / (impliedHome + impliedAway);
+                        // Shrink model probability towards market probability
+                        const modelProbHomeSpreadShrunk = MODEL_WEIGHT * modelProbHomeSpread + (1.0 - MODEL_WEIGHT) * marketProbHome;
+                        const ev = (modelProbHomeSpreadShrunk * bestHomeSpreadOdd) - 1.0;
+                        if (ev >= MIN_EV) {
+                            const kelly = 0.25 * ev / (bestHomeSpreadOdd - 1.0);
+                            const signStr = spreadPoint > 0 ? `+${spreadPoint}` : `${spreadPoint}`;
+                            calculatedBets.push({
+                                bet_type_line: `${game.home_team} ${signStr}`,
+                                best_bookmaker: `${bestHomeSpreadOdd.toFixed(2)} (${bestHomeSpreadBook})`,
+                                model_prob: `${(modelProbHomeSpreadShrunk * 100).toFixed(2)}%`,
+                                market_prob: `${(marketProbHome * 100).toFixed(2)}%`,
+                                ev: `${(ev * 100).toFixed(2)}%`,
+                                kelly_stake: `${(kelly * 100).toFixed(2)}%`,
+                                raw_ev: ev
+                            });
+                        }
+                    }
+                }
+
+                if (bestAwaySpreadOdd > 0) {
+                    const data = market_data[bestAwaySpreadBook];
+                    if (data.home_spread_odd && data.away_spread_odd) {
+                        const impliedHome = 1.0 / data.home_spread_odd;
+                        const impliedAway = 1.0 / data.away_spread_odd;
+                        const marketProbAway = impliedAway / (impliedHome + impliedAway);
+                        // Shrink model probability towards market probability
+                        const modelProbAwaySpreadShrunk = MODEL_WEIGHT * modelProbAwaySpread + (1.0 - MODEL_WEIGHT) * marketProbAway;
+                        const ev = (modelProbAwaySpreadShrunk * bestAwaySpreadOdd) - 1.0;
+                        if (ev >= MIN_EV) {
+                            const kelly = 0.25 * ev / (bestAwaySpreadOdd - 1.0);
+                            const awaySpreadPoint = -spreadPoint;
+                            const signStr = awaySpreadPoint > 0 ? `+${awaySpreadPoint}` : `${awaySpreadPoint}`;
+                            calculatedBets.push({
+                                bet_type_line: `${game.away_team} ${signStr}`,
+                                best_bookmaker: `${bestAwaySpreadOdd.toFixed(2)} (${bestAwaySpreadBook})`,
+                                model_prob: `${(modelProbAwaySpreadShrunk * 100).toFixed(2)}%`,
+                                market_prob: `${(marketProbAway * 100).toFixed(2)}%`,
+                                ev: `${(ev * 100).toFixed(2)}%`,
+                                kelly_stake: `${(kelly * 100).toFixed(2)}%`,
+                                raw_ev: ev
+                            });
+                        }
+                    }
+                }
+            }
+
+            // Only emit games that actually produced a qualifying +EV bet.
+            // Empty games are pure noise in the pasted payload and bait the LLM
+            // into fabricating rows to satisfy the table.
+            if (calculatedBets.length === 0) continue;
+
+            // Sort bets in this matchup by EV descending
+            calculatedBets.sort((a, b) => b.raw_ev - a.raw_ev);
+
+            // Emit ONLY what the QuantSlate prompt consumes (matchup + pre-calculated
+            // bets). market_data / sabermetrics are intentionally dropped: the prompt
+            // reads only calculated_bets, and the raw odds/stats just cause the model
+            // to mix wrong numbers into the output table.
             payload.push({
                 matchup: `${game.away_team} @ ${game.home_team}`,
                 commence_time: game.commence_time,
-                market_data,
-                sabermetrics: {
-                    away_starter: awayMetrics.starter,
-                    home_starter: homeMetrics.starter,
-                    away_offense: awayMetrics.offense,
-                    home_offense: homeMetrics.offense,
-                    park_factor: homeMetrics.park_factor
-                }
+                calculated_bets: calculatedBets.map(({ raw_ev, ...rest }) => rest)
             });
         }
     }
@@ -144,21 +495,189 @@ function compilePayload(games: OddsApiGame[]): any[] {
     return payload;
 }
 
+const pctNum = (s: string) => parseFloat(String(s).replace('%', '')) || 0;
+
+interface SlateData {
+    top: any[];
+    totalBets: number;
+    totalStake: number;
+    largest: any;
+    clusters: [string, any[]][];
+    cappedStake: number;
+}
+
+interface SlateMeta {
+    gamesScanned: number;
+    generatedAt: string; // ISO string
+}
+
+/**
+ * Deterministically builds the ranked slate — the job formerly delegated to the
+ * LLM. Flattens every game's calculated_bets into one global pool, ranks by EV,
+ * takes the top MAX_BETS, and computes real portfolio exposure (including a
+ * correlation-aware cap, since same-game bets break the Kelly independence
+ * assumption). Pure data — rendering is handled separately per output target.
+ */
+function buildSlate(payload: any[]): SlateData {
+    const allBets = payload.flatMap((game: any) =>
+        (game.calculated_bets || []).map((b: any) => ({ ...b, matchup: game.matchup }))
+    );
+    // Global rank by EV descending (the JSON only sorts within each game).
+    allBets.sort((a, b) => pctNum(b.ev) - pctNum(a.ev));
+    const top = allBets.slice(0, MAX_BETS);
+
+    const totalStake = top.reduce((sum, b) => sum + pctNum(b.kelly_stake), 0);
+    const largest = top.length
+        ? top.reduce((m, b) => (pctNum(b.kelly_stake) > pctNum(m.kelly_stake) ? b : m), top[0])
+        : null;
+
+    // Bets in the same matchup are NOT independent (a team's ML and its +1.5 both
+    // cash when that team plays well). The correlation-capped exposure counts only
+    // the single largest stake per game — a conservative lower bound on true risk.
+    const byMatchup = new Map<string, any[]>();
+    for (const b of top) {
+        if (!byMatchup.has(b.matchup)) byMatchup.set(b.matchup, []);
+        byMatchup.get(b.matchup)!.push(b);
+    }
+    const clusters = [...byMatchup.entries()].filter(([, bets]) => bets.length > 1);
+    const cappedStake = [...byMatchup.values()].reduce(
+        (sum, bets) => sum + Math.max(...bets.map(b => pctNum(b.kelly_stake))), 0
+    );
+
+    return { top, totalBets: allBets.length, totalStake, largest, clusters, cappedStake };
+}
+
+const EMPTY_MSG =
+    'No bets cleared the EV threshold today. The model sees no edge — that is a valid result, not an error.';
+
+function metaLine(s: SlateData, meta: SlateMeta): string {
+    const when = meta.generatedAt.slice(0, 16).replace('T', ' ') + ' UTC';
+    return `Generated ${when} · ${meta.gamesScanned} games scanned · ` +
+        `top ${s.top.length} of ${s.totalBets} qualifying bets · ` +
+        `MIN_EV ${(MIN_EV * 100).toFixed(1)}% · fractional Kelly 0.25`;
+}
+
+/** Polished GitHub-flavored Markdown report for the .md file. */
+function renderMarkdown(s: SlateData, meta: SlateMeta): string {
+    if (s.top.length === 0) {
+        return `# QuantSlate — Ranked Slate\n\n_${metaLine(s, meta)}_\n\n_${EMPTY_MSG}_`;
+    }
+    const head =
+        '| # | Matchup | Bet & Line | Best Book | Model % | Market % | EV % | Kelly % |\n' +
+        '|--:|:--|:--|:--|--:|--:|--:|--:|';
+    const rows = s.top.map((b, i) =>
+        `| ${i + 1} | ${b.matchup} | ${b.bet_type_line} | ${b.best_bookmaker} | ` +
+        `${b.model_prob} | ${b.market_prob} | ${b.ev} | ${b.kelly_stake} |`
+    );
+
+    const out = [
+        '# QuantSlate — Ranked Slate',
+        '',
+        `_${metaLine(s, meta)}_`,
+        '',
+        head,
+        ...rows,
+        '',
+        '## Portfolio exposure',
+        '',
+        `- **Total deployed:** ${s.totalStake.toFixed(2)}% of bankroll across ${s.top.length} ` +
+        `position${s.top.length === 1 ? '' : 's'} (fractional Kelly 0.25)`,
+        `- **Largest stake:** ${pctNum(s.largest.kelly_stake).toFixed(2)}% — ` +
+        `${s.largest.bet_type_line} · ${s.largest.matchup}`,
+    ];
+    if (s.clusters.length > 0) {
+        out.push(`- **Correlation-capped:** ${s.cappedStake.toFixed(2)}% (largest stake per game only)`);
+        out.push('');
+        out.push('> ⚠ **Correlated positions** — same-game bets break Kelly independence; their stakes overlap:');
+        out.push('>');
+        for (const [m, bets] of s.clusters) {
+            out.push(`> - ${m} — ${bets.map(b => b.bet_type_line).join(' + ')}`);
+        }
+        out.push('>');
+        out.push(`> Treat true exposure as between **${s.cappedStake.toFixed(2)}%** (capped) ` +
+            `and **${s.totalStake.toFixed(2)}%** (naive sum).`);
+    }
+    return out.join('\n');
+}
+
+/** Column-aligned plain-text table for the terminal (markdown pipes don't align). */
+function renderTerminal(s: SlateData, meta: SlateMeta): string {
+    const title = 'QUANTSLATE — RANKED SLATE';
+    if (s.top.length === 0) {
+        return `\n${title}\n${metaLine(s, meta)}\n\n${EMPTY_MSG}\n`;
+    }
+    const headers = ['#', 'Matchup', 'Bet & Line', 'Book', 'Model', 'Market', 'EV', 'Stake'];
+    const aligns: ('l' | 'r')[] = ['r', 'l', 'l', 'l', 'r', 'r', 'r', 'r'];
+    const rows = s.top.map((b, i) => [
+        String(i + 1), b.matchup, b.bet_type_line, b.best_bookmaker,
+        b.model_prob, b.market_prob, b.ev, b.kelly_stake,
+    ]);
+
+    const widths = headers.map((h, i) =>
+        Math.max(h.length, ...rows.map(r => r[i].length)));
+    const pad = (str: string, i: number) =>
+        aligns[i] === 'r' ? str.padStart(widths[i]) : str.padEnd(widths[i]);
+    // Bordered box table: one padding space each side of every cell.
+    const fmt = (cells: string[]) =>
+        '│ ' + cells.map(pad).join(' │ ') + ' │';
+    const border = (l: string, m: string, r: string) =>
+        l + widths.map(w => '─'.repeat(w + 2)).join(m) + r;
+    const topRule = border('┌', '┬', '┐');
+    const midRule = border('├', '┼', '┤');
+    const botRule = border('└', '┴', '┘');
+
+    const exposure = [
+        `Exposure : ${s.totalStake.toFixed(2)}% of bankroll across ${s.top.length} ` +
+        `position${s.top.length === 1 ? '' : 's'} (Kelly 0.25)`,
+        `Largest  : ${pctNum(s.largest.kelly_stake).toFixed(2)}% — ` +
+        `${s.largest.bet_type_line} (${s.largest.matchup})`,
+    ];
+    if (s.clusters.length > 0) {
+        exposure.push(`Capped   : ${s.cappedStake.toFixed(2)}% (corr-adjusted; largest stake per game)`);
+        exposure.push('⚠ Correlated same-game positions:');
+        for (const [m, bets] of s.clusters) {
+            exposure.push(`    ${m} — ${bets.map(b => b.bet_type_line).join(' + ')}`);
+        }
+    }
+
+    return [
+        '',
+        title,
+        metaLine(s, meta),
+        '',
+        topRule,
+        fmt(headers),
+        midRule,
+        ...rows.map(fmt),
+        botRule,
+        '',
+        ...exposure,
+        '',
+    ].join('\n');
+}
+
 // --- Execution ---
 async function run() {
     console.log('Fetching market odds...');
     const games = await fetchMarketOdds();
-    
+
     console.log('Merging live local sabermetrics and compiling payload...');
     const finalPayload = compilePayload(games);
 
     const outputPath = path.join(__dirname, 'quantslate_payload.json');
     fs.writeFileSync(outputPath, JSON.stringify(finalPayload, null, 2));
 
+    // Deterministic final slate — no LLM in the loop. One data model, two views.
+    const slate = buildSlate(finalPayload);
+    const meta: SlateMeta = { gamesScanned: games.length, generatedAt: new Date().toISOString() };
+
+    const slatePath = path.join(__dirname, 'quantslate_slate.md');
+    fs.writeFileSync(slatePath, renderMarkdown(slate, meta) + '\n');
+
     console.log(`\nSuccess. Processed ${finalPayload.length} valid games with verified on-field metrics.`);
     console.log(`Payload saved to: ${outputPath}`);
-    console.log('\nCommand to copy payload to clipboard:');
-    console.log('cat quantslate_payload.json | pbcopy');
+    console.log(`Ranked slate saved to: ${slatePath}`);
+    console.log(renderTerminal(slate, meta));
 }
 
 run();
